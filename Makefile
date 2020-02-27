@@ -1,6 +1,6 @@
 # Assemble all files here
 
-all: assembly c_code linker_bin execute_bin
+all: assembly c_code linker_bin cleanup execute_bin
 
 assembly:
 	@nasm -f elf32 kernel/boot.asm -o kernel/boot.o
