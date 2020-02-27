@@ -1,5 +1,7 @@
 #include "../libraries/bootstrap.h"
+#include "../libraries/screen.h"
 
 void bootstrap() {
-    return ;
+    clear_screen();
+    cprintf("Hello World", 0);
 }

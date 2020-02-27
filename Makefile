@@ -6,19 +6,27 @@ MODULES_PATH = src/app/modules
 BOOT_PATH = boot/bin
 STATIC_PATH = static
 
-all: assembly libraries c_code linker_bin cleanup execute_bin
+RUN_C_LIBRARY = gcc -m32 -fPIC
+RUN_SO_LIBRAY = @gcc -m32 -shared
+
+all: assembly libraries_c libraries_so c_code linker_bin cleanup execute_bin
 
 assembly:
 	@nasm -f elf32 $(KERNEL_PATH)/boot.asm -o $(STATIC_PATH)/boot.o
 
 c_code:
 	@gcc -m32 -c $(KERNEL_PATH)/main.c -o $(STATIC_PATH)/main.o \
-	-L$(STATIC_PATH)/bootstraplib -lbootstraplib
+	-L$(STATIC_PATH)/bootstraplib -lbootstraplib \
+	-L$(STATIC_PATH)/printlib -lprintlib
 
-libraries:
-	@gcc -m32 -fPIC -c $(MODULES_PATH)/bootstrap.c -o $(STATIC_PATH)/bootstrap.o
-	@gcc -m32 -shared -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o 
+libraries_c:
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/bootstrap.c -o $(STATIC_PATH)/bootstrap.o
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/print.c -o $(STATIC_PATH)/print.o
 	
+libraries_so:
+	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
+	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/printlib.so $(STATIC_PATH)/print.o
+
 linker_bin:
 	@rm -fr boot/bin/os.bin
 	@ld -m elf_i386 -T $(KERNEL_PATH)/linker.ld -o boot/bin/os.bin $(STATIC_PATH)/*.o
