@@ -1,4 +1,4 @@
-dist/
+dist/*.iso
 boot/bin/os.bin
 
 # .o files
