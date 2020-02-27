@@ -1,0 +1,6 @@
+dist/
+boot/bin/os.bin
+
+# .o files
+
+kernel/*.o
