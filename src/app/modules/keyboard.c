@@ -137,7 +137,6 @@ unsigned char *scanft() {
                     index++;
                 break;
                 case 28:
-                    index++;
                     reading = 0;
                     break;
                 case 30:
