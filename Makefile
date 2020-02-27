@@ -17,15 +17,18 @@ assembly:
 c_code:
 	@gcc -m32 -c $(KERNEL_PATH)/main.c -o $(STATIC_PATH)/main.o \
 	-L$(STATIC_PATH)/bootstraplib -lbootstraplib \
-	-L$(STATIC_PATH)/printlib -lprintlib
+	-L$(STATIC_PATH)/printlib -lprintlib \
+	-L$(STATIC_PATH)/printlib -lassemblylib
 
 libraries_c:
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/bootstrap.c -o $(STATIC_PATH)/bootstrap.o
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/print.c -o $(STATIC_PATH)/print.o
-	
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/assembly.c -o $(STATIC_PATH)/assembly.o
+
 libraries_so:
 	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
 	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/printlib.so $(STATIC_PATH)/print.o
+	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/assemblylib.so $(STATIC_PATH)/assembly.o
 
 linker_bin:
 	@rm -fr boot/bin/os.bin
@@ -36,7 +39,6 @@ cleanup:
 	@rm -fr $(LIBRARIES_PATH)/*.o
 	@rm -fr $(MODULES_PATH)/*.o
 	@rm -fr $(STATIC_PATH)/*.o $(STATIC_PATH)/*.so
-
 
 generate_iso:
 	@grub-mkrescue -o dist/duox2.iso boot
