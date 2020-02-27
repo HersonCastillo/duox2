@@ -5,9 +5,12 @@
 
 void bootstrap() {
     clear_screen();
-    print("Hello World my boy!");
     
-    unsigned char *command = scanft();
-    print(command);
+    unsigned char *command = (void*) 0;
+    while (1) {
+        print("$ ");
+        command = scanft();
+        command = (void *) 0;
+    }
 
 }
