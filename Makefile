@@ -17,18 +17,21 @@ assembly:
 c_code:
 	@gcc -m32 -c $(KERNEL_PATH)/main.c -o $(STATIC_PATH)/main.o \
 	-L$(STATIC_PATH)/bootstraplib -lbootstraplib \
-	-L$(STATIC_PATH)/printlib -lprintlib \
-	-L$(STATIC_PATH)/printlib -lassemblylib
+	-L$(STATIC_PATH)/assemblylib -lassemblylib \
+	-L$(STATIC_PATH)/cursorlib -lcursorlib \
+	-L$(STATIC_PATH)/keyboardlib -lkeyboardlib
 
 libraries_c:
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/bootstrap.c -o $(STATIC_PATH)/bootstrap.o
-	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/print.c -o $(STATIC_PATH)/print.o
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/assembly.c -o $(STATIC_PATH)/assembly.o
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/cursor.c -o $(STATIC_PATH)/cursor.o
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/keyboard.c -o $(STATIC_PATH)/keyboard.o
 
 libraries_so:
 	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
-	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/printlib.so $(STATIC_PATH)/print.o
 	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/assemblylib.so $(STATIC_PATH)/assembly.o
+	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/cursorlib.so $(STATIC_PATH)/cursor.o
+	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/keyboardlib.so $(STATIC_PATH)/keyboard.o
 
 linker_bin:
 	@rm -fr boot/bin/os.bin
