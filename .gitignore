@@ -1,6 +1,12 @@
-dist/
+dist/*.iso
 boot/bin/os.bin
 
 # .o files
 
-kernel/*.o
+src/kernel/*.o
+src/app/*/*.o
+src/app/*/*.a
+
+static/*.o
+static/*.a
+static/*.so

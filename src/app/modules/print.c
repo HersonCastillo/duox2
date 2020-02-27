@@ -1,15 +1,4 @@
-#define MAGIC_NUMBER 0xb8000
-#define WIDTH_SCREEN 80
-#define HEIGHT_SCREEN 25
-#define WHITE_TXT 0x07
-
-void clear_screen();
-void k_printf(char *message, unsigned int line);
-
-void kernel_main() {
-    clear_screen();
-    k_printf("Hello World", 0);
-}
+#include "../libraries/screen.h"
 
 void clear_screen() {
     char *videoCard = (char *) MAGIC_NUMBER;
@@ -21,7 +10,7 @@ void clear_screen() {
     }
 }
 
-void k_printf(char *message, unsigned int line) {
+void cprintf(char *message, unsigned int line) {
     char *videoCard = (char *) MAGIC_NUMBER;
     int index = 0u;
     index = line * WIDTH_SCREEN * 2;
