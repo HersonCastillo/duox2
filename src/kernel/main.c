@@ -3,10 +3,13 @@
 #define HEIGHT_SCREEN 25
 #define WHITE_TXT 0x07
 
+#include "../app/libraries/bootstrap.h"
+
 void clear_screen();
 void k_printf(char *message, unsigned int line);
 
 void kernel_main() {
+    bootstrap();
     clear_screen();
     k_printf("Hello World", 0);
 }
