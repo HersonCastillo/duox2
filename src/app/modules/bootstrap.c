@@ -6,11 +6,10 @@
 void bootstrap() {
     clear_screen();
     
-    unsigned char *command = (void*) 0;
-    while (1) {
-        print("$ ");
-        command = scanft();
-        command = (void *) 0;
-    }
+    unsigned char *command = (void *) 0;
+    
+    print("$ ");
+    command = scanft();
 
+    print(command);
 }

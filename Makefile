@@ -7,7 +7,7 @@ BOOT_PATH = boot/bin
 STATIC_PATH = static
 
 RUN_C_LIBRARY = gcc -m32 -fPIC
-RUN_SO_LIBRARY = @gcc -m32 -shared
+RUN_SO_LIBRARY = gcc -m32 -shared
 
 all: assembly libraries_c libraries_so c_code linker_bin cleanup execute_bin
 
