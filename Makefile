@@ -7,7 +7,7 @@ BOOT_PATH = boot/bin
 STATIC_PATH = static
 
 RUN_C_LIBRARY = gcc -m32 -fPIC
-RUN_SO_LIBRAY = @gcc -m32 -shared
+RUN_SO_LIBRARY = gcc -m32 -shared
 
 all: assembly libraries_c libraries_so c_code linker_bin cleanup execute_bin
 
@@ -28,10 +28,10 @@ libraries_c:
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/keyboard.c -o $(STATIC_PATH)/keyboard.o
 
 libraries_so:
-	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
-	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/assemblylib.so $(STATIC_PATH)/assembly.o
-	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/cursorlib.so $(STATIC_PATH)/cursor.o
-	@$(RUN_SO_LIBRAY) -o $(STATIC_PATH)/keyboardlib.so $(STATIC_PATH)/keyboard.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/assemblylib.so $(STATIC_PATH)/assembly.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/cursorlib.so $(STATIC_PATH)/cursor.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/keyboardlib.so $(STATIC_PATH)/keyboard.o
 
 linker_bin:
 	@rm -fr boot/bin/os.bin

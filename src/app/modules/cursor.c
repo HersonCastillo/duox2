@@ -2,18 +2,24 @@
 #include "../libraries/cursor.h"
 #include "../libraries/assembly.h"
 
-int cursorX = 0, cursorY = 0;
+struct PointersStruct {
+    int cursorX;
+    int cursorY;
+} pointers_struct = {
+    .cursorX = 0,
+    .cursorY = 0
+};
 
 void clear_screen() {
     clear_line(0, HEIGHT_SCREEN - 1);
-    cursorX = 0;
-    cursorY = 0;
+    pointers_struct.cursorX = 0;
+    pointers_struct.cursorY = 0;
     update_cursor();
 }
 
 void update_cursor() {
     unsigned temp;
-    temp = cursorY * WIDTH_SCREEN + cursorX;                                                   
+    temp = pointers_struct.cursorY * WIDTH_SCREEN + pointers_struct.cursorX;                                                   
     outportb(0x3D4, 14);                                                      
     outportb(0x3D5, temp >> 8);                                                       
     outportb(0x3D4, 15);
@@ -21,7 +27,7 @@ void update_cursor() {
 }
 
 void new_line_check() {
-    if (cursorY >= HEIGHT_SCREEN - 1) {
+    if (pointers_struct.cursorY >= HEIGHT_SCREEN - 1) {
         scroll_up(1);
     }
 }
@@ -34,11 +40,11 @@ void scroll_up(unsigned short lineNumber) {
         vidmem[index] = vidmem[index + WIDTH_SCREEN * 2 * lineNumber];
     }
     clear_line(HEIGHT_SCREEN - 1 - lineNumber, HEIGHT_SCREEN - 1);
-    if((cursorY - lineNumber) < 0 ) {
-        cursorY = 0;
-        cursorX = 0;
+    if((pointers_struct.cursorY - lineNumber) < 0 ) {
+        pointers_struct.cursorY = 0;
+        pointers_struct.cursorX = 0;
     } else {
-        cursorY -= lineNumber;
+        pointers_struct.cursorY -= lineNumber;
     }
     update_cursor();
 }
@@ -70,27 +76,27 @@ void print_char(char character){
     unsigned char *vidmem = (unsigned char*) MAGIC_NUMBER;     
     switch (character) {
         case 0x08:
-            if (cursorX > 0) {
-	            cursorX--;									
-                vidmem[(cursorY * WIDTH_SCREEN + cursorX) * LINE_SEPARATION] = 0x00;	                              
+            if (pointers_struct.cursorX > 0) {
+	            pointers_struct.cursorX--;									
+                vidmem[(pointers_struct.cursorY * WIDTH_SCREEN + pointers_struct.cursorX) * LINE_SEPARATION] = 0x00;	                              
 	        }
 	    break;
         case '\r':
-            cursorX = 0;
+            pointers_struct.cursorX = 0;
             break;
         case '\n':
-            cursorX = 0;
-            cursorY++;
+            pointers_struct.cursorX = 0;
+            pointers_struct.cursorY++;
         break;
         default:
-            vidmem[((cursorY * WIDTH_SCREEN + cursorX)) * LINE_SEPARATION] = character;
-            vidmem[((cursorY * WIDTH_SCREEN + cursorX)) * LINE_SEPARATION + 1] = 0x07;
-            cursorX++; 
+            vidmem[((pointers_struct.cursorY * WIDTH_SCREEN + pointers_struct.cursorX)) * LINE_SEPARATION] = character;
+            vidmem[((pointers_struct.cursorY * WIDTH_SCREEN + pointers_struct.cursorX)) * LINE_SEPARATION + 1] = 0x07;
+            pointers_struct.cursorX++; 
         break;
     }
-    if (cursorX >= WIDTH_SCREEN) {
-        cursorX = 0;                                                                
-        cursorY++;                                                                    
+    if (pointers_struct.cursorX >= WIDTH_SCREEN) {
+        pointers_struct.cursorX = 0;                                                                
+        pointers_struct.cursorY++;                                                                    
     }
     update_cursor();
     new_line_check();

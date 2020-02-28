@@ -5,9 +5,14 @@
 
 void bootstrap() {
     clear_screen();
-    print("Hello World my boy!");
     
-    unsigned char *command = scanft();
-    print(command);
-
+    unsigned char **command = { (void *) 0 };
+    unsigned long long index = 0;
+    
+    cmd:
+        print("$ ");
+        command[index] = scanft();
+        command[index] = 0;
+        index++;
+        goto cmd;
 }

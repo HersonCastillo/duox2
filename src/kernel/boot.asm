@@ -11,4 +11,5 @@ extern kernel_main
 start:
 	cli
 	call kernel_main
-	hlt
+	loop: hlt
+	jmp loop
