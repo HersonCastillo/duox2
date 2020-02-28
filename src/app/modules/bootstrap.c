@@ -6,10 +6,13 @@
 void bootstrap() {
     clear_screen();
     
-    unsigned char *command = (void *) 0;
+    unsigned char **command = { (void *) 0 };
+    unsigned long long index = 0;
     
-    print("$ ");
-    command = scanft();
-
-    print(command);
+    cmd:
+        print("$ ");
+        command[index] = scanft();
+        command[index] = 0;
+        index++;
+        goto cmd;
 }
