@@ -7,12 +7,16 @@ void bootstrap() {
     clear_screen();
     
     unsigned char **command = { (void *) 0 };
-    unsigned long long index = 0;
+    unsigned int index = 0;
     
-    cmd:
+    while (1) {
         print("$ ");
         command[index] = scanft();
+        
         command[index] = 0;
-        index++;
-        goto cmd;
+        command[++index] = (void *) 0;
+        //index = 0;
+
+        break_line();
+    }
 }
