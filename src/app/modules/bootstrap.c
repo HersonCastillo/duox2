@@ -2,17 +2,21 @@
 #include "../libraries/screen.h"
 #include "../libraries/cursor.h"
 #include "../libraries/keyboard.h"
+#include "../libraries/string.h"
 
 void bootstrap() {
-    clear_screen();
+  clear_screen();
+
+  const strings command = { (void *) 0 };
+  unsigned int index = 0;
+
+  while (1) {
+    print("$ ");
+    command[index] = scanft();
+        
+    command[index] = 0;
+    command[++index] = (void *) 0;
     
-    unsigned char **command = { (void *) 0 };
-    unsigned long long index = 0;
-    
-    cmd:
-        print("$ ");
-        command[index] = scanft();
-        command[index] = 0;
-        index++;
-        goto cmd;
+    break_line();
+  }
 }

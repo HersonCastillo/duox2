@@ -2,6 +2,8 @@
 
 #define _BOOTSTRAP_H_
 
-    void bootstrap(void);
+  #include "definitions.h"
+
+  void bootstrap(void);
 
 #endif
