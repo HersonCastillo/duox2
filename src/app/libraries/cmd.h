@@ -4,6 +4,8 @@
 
   #include "definitions.h"
 
-  void eval(string command, callback exec);
+  void eval(string command);
+
+  void help(const string args);
 
 #endif
