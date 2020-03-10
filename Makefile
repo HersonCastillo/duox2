@@ -20,7 +20,9 @@ c_code:
 	-L$(STATIC_PATH)/assemblylib -lassemblylib \
 	-L$(STATIC_PATH)/cursorlib -lcursorlib \
 	-L$(STATIC_PATH)/keyboardlib -lkeyboardlib \
-	-L$(STATIC_PATH)/stringlib -lstringlib
+	-L$(STATIC_PATH)/stringlib -lstringlib \
+	-L$(STATIC_PATH)/cmdlib -lcmdlib \
+	-L$(STATIC_PATH)/taskslib -ltaskslib
 
 libraries_c:
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/bootstrap.c -o $(STATIC_PATH)/bootstrap.o
@@ -28,6 +30,8 @@ libraries_c:
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/cursor.c -o $(STATIC_PATH)/cursor.o
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/keyboard.c -o $(STATIC_PATH)/keyboard.o
 	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/string.c -o $(STATIC_PATH)/string.o
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/cmd.c -o $(STATIC_PATH)/cmd.o
+	@$(RUN_C_LIBRARY) -c $(MODULES_PATH)/tasks.c -o $(STATIC_PATH)/tasks.o
 
 libraries_so:
 	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/bootstraplib.so $(STATIC_PATH)/bootstrap.o
@@ -35,6 +39,8 @@ libraries_so:
 	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/cursorlib.so $(STATIC_PATH)/cursor.o
 	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/keyboardlib.so $(STATIC_PATH)/keyboard.o
 	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/stringlib.so $(STATIC_PATH)/string.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/cmdlib.so $(STATIC_PATH)/cmd.o
+	@$(RUN_SO_LIBRARY) -o $(STATIC_PATH)/taskslib.so $(STATIC_PATH)/tasks.o
 
 linker_bin:
 	@rm -fr boot/bin/os.bin

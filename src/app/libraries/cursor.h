@@ -9,7 +9,7 @@
   void new_line_check();
   void print(string message);
   void print_char(char character);
-  void scroll_up(unsigned short lineNumber);
-  void clear_line(unsigned short from, unsigned short to);
+  void scroll_up(ushort lineNumber);
+  void clear_line(ushort from, ushort to);
 
 #endif

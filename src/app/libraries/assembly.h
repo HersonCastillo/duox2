@@ -4,7 +4,7 @@
 
   #include "definitions.h"
 
-  void outportb(unsigned short port, _string data);
-  _string inportb(unsigned short port);
+  void outportb(ushort port, _string data);
+  _string inportb(ushort port);
 
 #endif

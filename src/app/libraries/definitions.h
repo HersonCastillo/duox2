@@ -6,9 +6,10 @@
   #define null    0
   
   enum bool { false, true };
+  typedef unsigned short ushort;
   typedef unsigned char _string;
   typedef _string *string;
   typedef string *strings;
-  typedef void (*callback) (int return_code, const string args);
+  typedef void (*callback) (const string args);
 
 #endif

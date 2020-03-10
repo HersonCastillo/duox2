@@ -3,6 +3,7 @@
 #include "../libraries/cursor.h"
 #include "../libraries/keyboard.h"
 #include "../libraries/string.h"
+#include "../libraries/cmd.h"
 
 void bootstrap() {
   clear_screen();
@@ -13,7 +14,9 @@ void bootstrap() {
   while (1) {
     print("$ ");
     command[index] = scanft();
-        
+    
+    eval(command[index]);
+
     command[index] = 0;
     command[++index] = (void *) 0;
     
