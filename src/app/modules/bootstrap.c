@@ -10,6 +10,8 @@ void bootstrap() {
   const strings command = { (void *) 0 };
   unsigned int index = 0;
 
+  print(trim("     Hola     adios  "));
+
   while (1) {
     print("$ ");
     command[index] = scanft();

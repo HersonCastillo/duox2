@@ -6,6 +6,7 @@
   #define null    0
   
   enum bool { false, true };
+  typedef unsigned short ushort;
   typedef unsigned char _string;
   typedef _string *string;
   typedef string *strings;

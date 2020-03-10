@@ -4,6 +4,9 @@
     
   #include "definitions.h"
 
-  unsigned short strlength(string message);
+  string trim(string message);
+  ushort strlength(string message);
+  ushort letters_count(string message);
+  ushort strcompare(string first, string second);
 
 #endif

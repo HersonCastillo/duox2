@@ -33,9 +33,9 @@ void new_line_check() {
   }
 }
 
-void scroll_up(unsigned short lineNumber) {
+void scroll_up(ushort lineNumber) {
   string vidmem = (string) MAGIC_NUMBER;
-  unsigned short index = 0;
+  ushort index = 0;
   clear_line(0, lineNumber - 1);                                            
   for (index; index < WIDTH_SCREEN * (HEIGHT_SCREEN - 1) * 2; index++) {
     vidmem[index] = vidmem[index + WIDTH_SCREEN * 2 * lineNumber];
@@ -50,8 +50,8 @@ void scroll_up(unsigned short lineNumber) {
   update_cursor();
 }
 
-void clear_line(unsigned short from, unsigned short to) {
-  unsigned short index = WIDTH_SCREEN * from * LINE_SEPARATION;
+void clear_line(ushort from, ushort to) {
+  ushort index = WIDTH_SCREEN * from * LINE_SEPARATION;
   string vidmem = (string) MAGIC_NUMBER;
   for (index; index < (WIDTH_SCREEN * to * LINE_SEPARATION); index++) {
     vidmem[index] = 0x0;
@@ -59,7 +59,7 @@ void clear_line(unsigned short from, unsigned short to) {
 }
 
 void print(string message){
-  unsigned short index = 0;
+  ushort index = 0;
   _string length = strlength(message) - 1;              
   for (index; index < length; index++) {
     print_char(message[index]);
