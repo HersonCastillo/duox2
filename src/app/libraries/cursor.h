@@ -4,6 +4,7 @@
 
   #include "definitions.h"
 
+  void cursor();
   void clear_screen();
   void update_cursor();
   void new_line_check();

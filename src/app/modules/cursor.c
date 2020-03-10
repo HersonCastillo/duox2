@@ -95,3 +95,8 @@ void print_char(char character){
   update_cursor();
   new_line_check();
 }
+
+void cursor() {
+  string vidmem = (string) MAGIC_NUMBER;
+  vidmem[(pointers_struct.cursorY * 0x50 + pointers_struct.cursorX) * 0x02 + 1] = 0x07;
+}

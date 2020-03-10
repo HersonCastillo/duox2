@@ -15,6 +15,7 @@ string scanft() {
   int index = 0;
   short reading = true;
   while (reading) {
+    cursor();
     char keyboardEvent = inportb(0x64) & 0x1;
     if (keyboardEvent) {
       char keyCode = inportb(0x60);
