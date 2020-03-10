@@ -2,6 +2,10 @@
 
 #define _KEYBOARD_H_
 
-    unsigned char *scanft();
+  #include "definitions.h"
+    
+  string scanft();
+  void break_line();
+  void delay_break_time();
 
 #endif

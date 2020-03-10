@@ -1,17 +1,17 @@
 #include "../libraries/assembly.h"
 
-void outportb(unsigned short port, unsigned char data){
+void outportb(ushort port, _string data){
 	__asm__ __volatile__(
-	    "outb %1, %0"
-	    : : "dN" (port), "a" (data)
+	  "outb %1, %0"
+	  : : "dN" (port), "a" (data)
 	);
 }
 
-unsigned char inportb(unsigned short port){
-    unsigned char rv;
-    __asm__ __volatile__(
-	    "inb %1, %0"
-	    : "=a" (rv) : "dN" (port)
+_string inportb(ushort port){
+  _string rv;
+  __asm__ __volatile__(
+	  "inb %1, %0"
+	  : "=a" (rv) : "dN" (port)
 	);
-    return rv;
+  return rv;
 }
