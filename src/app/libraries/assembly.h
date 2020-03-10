@@ -2,7 +2,9 @@
 
 #define _ASSEMBLY_H_
 
-    void outportb(unsigned short port, unsigned char data);
-    unsigned char inportb(unsigned short port);
+  #include "definitions.h"
+
+  void outportb(unsigned short port, _string data);
+  _string inportb(unsigned short port);
 
 #endif
